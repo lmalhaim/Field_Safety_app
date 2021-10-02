@@ -1,5 +1,5 @@
 import * as firebase from "firebase";
-
+import * as network from 'expo-network'
 const firebaseConfig = {
     apiKey: "AIzaSyAhdyDuzoPuLfIsc2hefAO1CBUZ5GZZy0o",
     authDomain: "fieldsafety-47193.firebaseapp.com",
@@ -21,18 +21,127 @@ if (firebase.apps.length == 0) {
 
 const dataBase = firebase.firestore(); 
 
-const usersRef = db.collection('User');
+const userRef = dataBase.collection('user');
+const equipmentRef = dataBase.collection('equipement');
+const safetyDocsRef = dataBase.collection('safety_documents');
+const incidentRef = dataBase.collection('incident'); 
+let deviceAPI = ""
 
 export async function addUser(){
-    const deviceAPI = "";
-    try{
-        const userID = usersRef.doc(deviceAPI).get()
-        console.log(userID)
-
-    }catch(err){
-        console.log(err); 
-    }
+    deviceAPI = await network.getIpAddressAsync(); 
+    await userRef.doc(deviceAPI).get()
+    .then(async(data)=>{
+      if(data.data()==undefined){
+        await userRef.doc(deviceAPI).set({
+          position: 'w',
+        })
+        .then(()=>{
+          console.log("user successfully added");
+        })
+        .catch((err)=>{
+          console.log("error message");
+        })
+      }
+      else{
+        console.log("user already exists"); 
+      }
+    })
+    .catch((err)=>{
+      console.log(err);  
+    });
 }
 
-const equipementsRef = db.collection('Equipement');
+
+export async function fetchSafetyDocs(RetrievedDocs){
+  try{
+    var docList = []; 
+    var snapshot = await safetyDocsRef.get(); 
+    snapshot.forEach((doc)=>{
+      docList.push({
+        id: doc.id, 
+        pdf: "", 
+      })
+    });
+  
+    RetrievedDocs(docList); 
+  } catch(err){
+    console.log(err); 
+  }
+}
+
+
+export async function fetchEquipements(){
+  try{
+    var faveList = []; 
+    var equipementList = []; 
+
+    //Fetch favorites
+    var snapshotFave = await userRef.doc(deviceAPI).get(); 
+    if(snapshotFave.data().equipements){
+      snapshotFave.data().equipments.forEach((equipment)=>{
+        faveList.push(equipment); 
+      });
+    }
+
+    //Fetchh all 
+    var snapshot = await equipmentRef.get(); 
+    snapshot.forEach((doc)=>{
+      var status = false; 
+      faveList.forEach((eq)=>{
+        if(eq == doc.id){
+          status = true; 
+        }
+      })
+      equipementList.push({
+        id: doc.id, 
+        name: doc.data().name, 
+        status: doc.data().status, 
+        fave: status,
+      })
+    });
+    console.log(equipementList); 
+    //RetrievedDocs(equipementList); 
+  } catch(err){
+    console.log(err); 
+  }
+}
+
+export async function postIncident(equipement_id, content){
+    await incidentRef.add(
+      {
+        created_by: deviceAPI,
+        equipement_id: equipement_id,
+        content: content, 
+        status: 'pending',
+        created_at: firebase.firestore.FieldValue.serverTimestamp(),
+      }
+    ).then(()=>{
+      console.log('incident successfully added'); 
+    }).catch((err)=>{
+      console.log(err); 
+    })
+}
+
+
+export async function fetchIncidents(){
+  try{
+    var incidentList = []; 
+    var snapshot = await incidentRef.get(); 
+    snapshot.forEach((doc)=>{
+      incidentList.push({
+        incident_id: doc.id, 
+        created_by: doc.data().created_by,
+        equipement_id: doc.data().equipement_id,
+        content: doc.data().content, 
+        status: doc.data().status,
+        created_at: doc.data().created_at,
+      })
+    });
+    console.log(incidentList)
+  
+  } catch(err){
+    console.log(err); 
+  }
+}
+
 
