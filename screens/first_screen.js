@@ -1,10 +1,11 @@
 import * as React from "react";
-import styles from "../StyleSheet";
+import styles from "../assets/StyleSheet.js";
 import { Image, Text, TouchableOpacity, View } from "react-native";
 import { NavigationContainer } from '@react-navigation/native';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Searchbar } from 'react-native-paper';
+import IncidentList from './IncidentList';
 
 function HomeScreen() {
   return (
@@ -39,7 +40,7 @@ export default function FirstScreen(props) {
 
       <NavigationContainer>
         <Tab.Navigator>
-          <Tab.Screen name="Incidents" component={HomeScreen} />
+          <Tab.Screen name="Incidents" component={IncidentList} />
           <Tab.Screen name="Equipments" component={SettingsScreen} />
         </Tab.Navigator>
       </NavigationContainer>
