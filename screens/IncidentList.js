@@ -17,7 +17,7 @@ class IncidentList extends React.Component {
         }));  
     }
     async componentDidMount(){
-        console.log('here');
+       console.log('here', 'incident');
         await fetchIncidents(this.RetrievedIncidents); 
     }
     render(){

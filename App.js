@@ -9,6 +9,7 @@ import { addUser } from './Api/api';
 import IncidentList from './screens/IncidentList';
 import EquipmentList from "./screens/EquipmentList";
 import DocList from './screens/DocList'
+import IncidentForm from './screens/reportIncident';
 
 
 const Tab = createBottomTabNavigator(); 
@@ -18,9 +19,10 @@ export default function App() {
     <View style={styles.container}>
       <NavigationContainer>
         <Tab.Navigator>
-          <Tab.Screen name="Equipments" component={EquipmentList} />
           <Tab.Screen name="Safety Documents" component={DocList} />
+          <Tab.Screen name="Equipments" component={EquipmentList} />
           <Tab.Screen name="Incidents" component={IncidentList} />
+          <Tab.Screen name="Report Incident" component={IncidentForm} />
         </Tab.Navigator>
       </NavigationContainer>
     </View>
@@ -31,7 +33,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'white',
-    alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#fff',
   },

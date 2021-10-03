@@ -6,9 +6,12 @@ export default function Document(props){
         <View style={styles.container}>
             <View style={styles.row}>
                 <Text style = {styles.rowTitle}>
-                    {props.name}
+                    {props.name=="" ? "empty" : props.name}
                 </Text>
-                <Button title = "view" onPress = {()=>{}}/>
+                <View style = {styles.viewButton}>
+
+                <Button  title = "view" onPress = {()=>{}}/>
+                </View>
             </View>
         </View>
     );
@@ -27,23 +30,19 @@ const styles = StyleSheet.create({
         width: Dimensions.get('window').width - 20,
     },
     row: {
-        flexDirection: 'row', 
+        flexDirection: 'row',
+        justifyContent: 'space-between',
     },
 
     rowTitle: {
         color: 'gray', 
-        marginLeft: 5, 
+        margin: 5, 
+        marginTop: 9, 
         fontWeight: 'bold', 
 
     },
-    statusView: {
-        position: 'absolute', 
-        right: 5,
-        top: '30%',   
+    viewButton:{
+        position: 'relative',
+        marginLeft: '70%',
     },
-    
-    incidentsinfo: {
-        alignSelf: 'center',
-        fontSize: 15,
-    }
 })
