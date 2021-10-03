@@ -42,29 +42,31 @@ export default function Incident(props){
 const styles = StyleSheet.create({
     container: {
         flexDirection: 'column',
-        backgroundColor: 'rgba(0,0,0,0.6)',
-        borderColor: "black",
-        borderWidth: 1,
-        borderRadius: 8,
+        backgroundColor: 'white',
+        // borderColor: "black",
+        // borderWidth: 1,
+        borderRadius: 20,
         justifyContent: 'flex-start',
         alignItems: 'flex-start',
-        margin: 10,
+        marginTop: 20,
+        paddingTop: 10,
+        paddingLeft: 10,
         width: Dimensions.get('window').width - 20,
-        shadowColor: 'tomato',
+        shadowColor: 'lightgrey',
         shadowRadius: 5,
         shadowOpacity: 1,
+        backgroundColor: 'white',
     },
     row: {
         flexDirection: 'row',
-        color: 'white'
     },
     rowInput: {
         margin: 7,
-        color: 'white',
+        color: 'black',
         fontSize: 14
     },
     rowTitle: {
-        color: 'white',
+        color: 'black',
         margin: 7,
         fontWeight: 'bold',
         fontSize: 16
@@ -73,12 +75,11 @@ const styles = StyleSheet.create({
         position: 'absolute',
         right: 5,
         top: '40%',
-        paddingLeft: 5,
-        paddingTop: 5,
+        padding: 5,
         paddingBottom: 5,
         borderRadius: 40,
         borderWidth: 1,
-        borderColor: 'aliceblue',
+        borderColor: 'lightgrey',
 
     },
     incidentsinfo: {
