@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { TouchableOpacity, View, ScrollView, Modal, TouchableHighlightBase, StyleSheet } from "react-native"
-import { addUser, fetchIncidents, fetchSafetyDocs } from "../Api/api";
+import {  fetchSafetyDocs } from "../Api/api";
+import Document from '../components/document';
 
 class DocList extends React.Component {
     constructor(props){
@@ -22,11 +23,12 @@ class DocList extends React.Component {
         return(
             <View  style = {styles.container}>
                 <ScrollView style = {styles.scrollList} >
-                    {this.state.incidents.map(
+                    {this.state.docs.map(
                         (item, index)=>{
                             return(
                                 <View key = {index}>
-                                    <Document id = {item.incident_id} created_by = {item.created_by} equipement_id = {item.equipement_id} status = {item.status} content = {item.content}/>
+                                    <Document id = {item.id} 
+                                    name = {item.name}/>
                                 </View>
                             );
                         })
@@ -47,4 +49,4 @@ const styles = StyleSheet.create({
     },
 })
 
-export default IncidentList; 
+export default DocList; 

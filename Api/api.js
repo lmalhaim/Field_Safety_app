@@ -59,6 +59,7 @@ export async function fetchSafetyDocs(RetrievedData){
     snapshot.forEach((doc)=>{
       docList.push({
         id: doc.id, 
+        name: doc.data().name,
         pdf: "", 
       })
     });

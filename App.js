@@ -8,7 +8,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { addUser } from './Api/api';
 import IncidentList from './screens/IncidentList';
 import EquipmentList from "./screens/EquipmentList";
-
+import DocList from './screens/DocList'
 
 
 const Tab = createBottomTabNavigator(); 
@@ -16,8 +16,6 @@ export default function App() {
   addUser(); 
   return (
     <View style={styles.container}>
-      <Screen_3 />
-      <StatusBar style="auto" />
       <NavigationContainer>
         <Tab.Navigator>
           <Tab.Screen name="Equipments" component={EquipmentList} />
