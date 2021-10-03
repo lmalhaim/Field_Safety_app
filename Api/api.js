@@ -52,7 +52,7 @@ export async function addUser(){
 }
 
 
-export async function fetchSafetyDocs(RetrievedDocs){
+export async function fetchSafetyDocs(RetrievedData){
   try{
     var docList = []; 
     var snapshot = await safetyDocsRef.get(); 
@@ -63,14 +63,14 @@ export async function fetchSafetyDocs(RetrievedDocs){
       })
     });
   
-    RetrievedDocs(docList); 
+    RetrievedData(docList); 
   } catch(err){
     console.log(err); 
   }
 }
 
 
-export async function fetchEquipements(){
+export async function fetchEquipements(RetrievedData){
   try{
     var faveList = []; 
     var equipementList = []; 
@@ -99,8 +99,7 @@ export async function fetchEquipements(){
         fave: status,
       })
     });
-    console.log(equipementList); 
-    //RetrievedDocs(equipementList); 
+    RetrievedData(equipementList); 
   } catch(err){
     console.log(err); 
   }
@@ -122,11 +121,34 @@ export async function postIncident(equipement_id, content){
     })
 }
 
+export async function acceptIncident(incidentId){
+  await incidentRef.doc(incidentId).update({
+    status: 'accepted',
+  })
+  .then(()=>{
+    console.log("incident accepted")
+  })
+  .catch((err)=>{
+    console.log(err)
+  });
+}
 
-export async function fetchIncidents(){
+export async function rejectIncident(incidentId){
+  await incidentRef.doc(incidentId).update({
+    status: 'rejected',
+  })
+  .then(()=>{
+    console.log("incident rejected")
+  })
+  .catch((err)=>{
+    console.log(err)
+  });
+}
+
+export async function fetchIncidents(RetrievedData){
   try{
     var incidentList = []; 
-    var snapshot = await incidentRef.get(); 
+    var snapshot = await incidentRef.get();
     snapshot.forEach((doc)=>{
       incidentList.push({
         incident_id: doc.id, 
@@ -137,11 +159,12 @@ export async function fetchIncidents(){
         created_at: doc.data().created_at,
       })
     });
-    console.log(incidentList)
+    RetrievedData(incidentList)
   
   } catch(err){
     console.log(err); 
   }
 }
+
 
 
