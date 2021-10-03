@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Image, Text, TouchableOpacity, View, StyleSheet, Button, onPress } from "react-native";
+import { TouchableOpacity, View, ScrollView, Modal, TouchableHighlightBase, StyleSheet } from "react-native";
 import { fetchEquipments } from "../Api/api";
 import Equipment from "../components/equipment";
 
