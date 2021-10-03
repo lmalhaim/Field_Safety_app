@@ -49,7 +49,7 @@ export default function IncidentForm(){
                 value = {content}
                 onChangeText = {(text)=>{setContent(text)}} />
             </View>
-            <Button style={styles.appButtonText} title = "submit" onPress = {()=>{postIncidentHandler()}}/>
+            <Button title = "submit" onPress = {()=>{postIncidentHandler()}}/>
         </View>
     );
 }
