@@ -1,17 +1,14 @@
 import * as React from "react";
-import { Image, Text, TouchableOpacity, View, StyleSheet, Dimensions } from "react-native";
+import { Image, Text, TouchableOpacity, View, StyleSheet, Dimensions, Button } from "react-native";
 
-export default function Incident(props){
-
+export default function Document(props){
     return (
         <View style={styles.container}>
             <View style={styles.row}>
                 <Text style = {styles.rowTitle}>
                     {props.name}
                 </Text>
-                <Text style = {styles.rowInput}>
-                    {props.id}
-                </Text>
+                <Button title = "view" onPress = {()=>{}}/>
             </View>
         </View>
     );
@@ -32,13 +29,11 @@ const styles = StyleSheet.create({
     row: {
         flexDirection: 'row', 
     },
-    rowInput: {
-        marginLeft: 5, 
-        
-    },
+
     rowTitle: {
         color: 'gray', 
         marginLeft: 5, 
+        fontWeight: 'bold', 
 
     },
     statusView: {

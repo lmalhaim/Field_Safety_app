@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { TouchableOpacity, View, ScrollView, Modal, TouchableHighlightBase, StyleSheet } from "react-native"
 import { addUser, fetchIncidents, fetchSafetyDocs } from "../Api/api";
-import Incident from "../components/incident";
 
 class DocList extends React.Component {
     constructor(props){
@@ -27,7 +26,7 @@ class DocList extends React.Component {
                         (item, index)=>{
                             return(
                                 <View key = {index}>
-                                    <Incident id = {item.incident_id} created_by = {item.created_by} equipement_id = {item.equipement_id} status = {item.status} content = {item.content}/>
+                                    <Document id = {item.incident_id} created_by = {item.created_by} equipement_id = {item.equipement_id} status = {item.status} content = {item.content}/>
                                 </View>
                             );
                         })
