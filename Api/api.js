@@ -69,37 +69,32 @@ export async function fetchSafetyDocs(RetrievedData){
   }
 }
 
+export async function AddEquipmentToFav(equipement_id){
+  /*equipements = []
+  var snapshotFave = await userRef.doc(deviceAPI).get(); 
+  if(snapshotFave.data().equipements){
+    equipements.push(snapshotFave.data().equipements);
+  } 
+  console.log(equipements);
+  equipements.push(equipement_id);
+  
+  await userRef.doc(deviceAPI).update({
+    equipements: equipements
+  }).then(()=>{
+    console.log('added to fave')
+  }).catch((err)=>{
+    console.log('err', err); 
+  })*/
+}
+
 
 export async function fetchEquipments(RetrievedData){
   try{
-    var faveList = []; 
     var equipementList = []; 
-    deviceAPI = await network.getIpAddressAsync(); 
-    console.log('d', deviceAPI); 
-
-    //Fetch favorites
-    try{
-      var snapshotFave = await userRef.doc(deviceAPI).get(); 
-      if(snapshotFave.data().equipements){
-        snapshotFave.data().equipments.forEach((equipment)=>{
-          faveList.push(equipment); 
-        });
-      }
-
-    }catch(err){
-      console.log('here', err);
-    }
-
-    //Fetchh all 
-    try{
+    
       var snapshot = await equipmentRef.get(); 
       snapshot.forEach((doc)=>{
         var status = false; 
-        faveList.forEach((eq)=>{
-          if(eq == doc.id){
-            status = true; 
-          }
-        })
         equipementList.push({
           id: doc.id, 
           name: doc.data().name, 
@@ -107,9 +102,8 @@ export async function fetchEquipments(RetrievedData){
           fave: status,
         })
       });
-    }catch(err){
-      console.log('here1', err)
-    }
+   
+
     RetrievedData(equipementList); 
   } catch(err){
     console.log(err); 

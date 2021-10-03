@@ -16,6 +16,7 @@ export default function App() {
       <NavigationContainer>
         <Tab.Navigator>
           <Tab.Screen name="Equipments" component={EquipmentList} />
+          <Tab.Screen name="Safety Documents" component={DocList} />
           <Tab.Screen name="Incidents" component={IncidentList} />
         </Tab.Navigator>
       </NavigationContainer>

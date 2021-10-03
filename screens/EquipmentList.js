@@ -1,17 +1,28 @@
 import * as React from "react";
 import { TouchableOpacity, View, ScrollView, Modal, TouchableHighlightBase, StyleSheet } from "react-native";
-import { fetchEquipments } from "../Api/api";
+import { fetchEquipments, fetchFaves } from "../Api/api";
 import Equipment from "../components/equipment";
 
 
-class IncidentList extends React.Component {
+class EquipmentList extends React.Component {
     constructor(props){
         super(props);
         this.state = {
             equipments : [], 
-        };
+            fave: [], 
+        }
+        this.toggleFavorite = this.toggleFavorite.bind(this)
     }
-
+    toggleFavorite = (equipment_id) =>{
+        let tempFave = []
+        this.state.equipments.forEach((item)=>{
+            if(item.id == equipment_id){
+                item.fave = !item.fave; 
+            }
+            tempFave.push(item); 
+        }); 
+        this.RetrievedEquipments(tempFave); 
+    }
     RetrievedEquipments = (recievedData) => {
         this.setState((prevState)=>({
             equipments: (prevState.equipments = recievedData), 
@@ -28,10 +39,14 @@ class IncidentList extends React.Component {
                         (item, index)=>{
                             return(
                                 <View key = {index}>
-                                    <Equipment  id = {item.id}
+                                    <Equipment  
+                                    RetrievedEquipments = {this.RetrievedEquipments}
+                                    toggleFavorite = {this.toggleFavorite}
+                                    fave = {item.fave}
+                                    id = {item.id}
                                     name = {item.name} 
                                     status= {item.status}
-                                    fave ={item.fave}/>
+                                    />
                                 </View>
                             );
                         })
@@ -52,7 +67,7 @@ const styles = StyleSheet.create({
     },
 })
 
-export default IncidentList; 
+export default  EquipmentList; 
 /*
 export default function SubmitEquipment(props){
 
