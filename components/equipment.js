@@ -1,12 +1,28 @@
-
+import { AntDesign } from '@expo/vector-icons'; 
 import * as React from "react";
 import { Image, Text, TouchableOpacity, View, StyleSheet, Dimensions } from "react-native";
+import { AddEquipmentToFav, fetchEquipments, isFave } from '../Api/api';
+
 export default function Equipment(props){
-    let [status, setStatus] = React.useState("available")
+    let [status, setStatus] = React.useState("available");
+    let [iconName, setIconName] = React.useState("staro"); 
     EquipmentStatus(); 
     function EquipmentStatus(){
         if (!props.status){
             setStatus('unavailable')
+        }
+        
+    }
+
+    const toggleFave = () => {
+        if(props.fave){
+            setIconName("staro")
+            props.toggleFavorite(props.id); 
+        }
+        else{
+
+            setIconName("star")
+            props.toggleFavorite(props.id); 
         }
     }
     return (
@@ -27,11 +43,13 @@ export default function Equipment(props){
                     {props.name}
                 </Text>
             </View>
-            <View style={styles.statusView}>
-                 <Text style = {status == 'available' ? {color: 'green'} : {color: 'red'}}>{status}</Text>
+            <View style={styles.row} >
+                 <Text style = {status == 'available' ? {margin: 5, color: 'green'} : {margin: 5, color: 'red'}}>{status}</Text>
             </View>
-            <View style={styles.row}>
-                <Text style = {styles.isFavorite}>"{props.fave}"</Text>
+            <View style={styles.isFavView}>
+                <TouchableOpacity onPress = {toggleFave}>
+                    <AntDesign name={iconName} size={24} color="black" />
+                </TouchableOpacity>
             </View>
         </View>
     );
@@ -61,11 +79,12 @@ const styles = StyleSheet.create({
         marginLeft: 5, 
 
     },
-    statusView: {
+    isFavView: {
         position: 'absolute', 
-        right: 5,
-        top: '30%',   
+        right: 10,
+        top: '25%',   
     },
+
     
     incidentsinfo: {
         alignSelf: 'center',
