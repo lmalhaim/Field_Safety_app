@@ -25,19 +25,17 @@ class IncidentList extends React.Component {
     render(){
         return(
             <View  style = {styles.container}>
-              <ImageBackground source={image} style={styles.image}>
-                <ScrollView style = {styles.scrollList} >
-                    {this.state.incidents.map(
-                        (item, index)=>{
-                            return(
-                                <View key = {index}>
-                                    <Incident id = {item.incident_id} created_by = {item.created_by} equipement_id = {item.equipement_id} status = {item.status} content = {item.content}/>
-                                </View>
-                            );
-                        })
-                    }
-                </ScrollView>
-              </ImageBackground>
+              <ScrollView style = {styles.scrollList} >
+                  {this.state.incidents.map(
+                      (item, index)=>{
+                          return(
+                              <View key = {index}>
+                                  <Incident id = {item.incident_id} created_by = {item.created_by} equipement_id = {item.equipement_id} status = {item.status} content = {item.content}/>
+                              </View>
+                          );
+                      })
+                  }
+              </ScrollView>
             </View>
         );
     }
@@ -48,6 +46,7 @@ const styles = StyleSheet.create({
         flex: 1,
         // paddingTop: 40,
         // paddingBottom: 40,
+        backgroundColor: 'whitesmoke',
         justifyContent: "center",
         alignItems: "center",
     },
