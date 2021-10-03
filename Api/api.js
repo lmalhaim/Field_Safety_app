@@ -154,7 +154,8 @@ export async function rejectIncident(incidentId){
 export async function fetchIncidents(RetrievedData){
   try{
     var incidentList = []; 
-    var snapshot = await incidentRef.get();
+    var snapshot = await incidentRef.orderBy('created_at').get();
+    console.log(snapshot)
     snapshot.forEach((doc)=>{
       incidentList.push({
         incident_id: doc.id, 

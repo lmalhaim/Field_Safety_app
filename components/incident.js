@@ -30,7 +30,7 @@ export default function Incident(props){
                 </Text>
             </View>
             <View style={styles.statusView}>
-               <Text style = {props.status == 'pending' ? {color: 'green', fontWeight: 'bold'} : {color: 'red', fontWeight: 'bold'}}>{props.status}</Text>
+               <Text style = {props.status != 'rejected' ? {color: 'green', fontWeight: 'bold'} : {color: 'red', fontWeight: 'bold'}}>{props.status}</Text>
             </View>
             <View style={styles.row}>
                 <Text style = {styles.incidentsinfo}>"{props.content}"</Text>

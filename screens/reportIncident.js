@@ -16,6 +16,8 @@ export default function IncidentForm(){
             Alert.alert('Error', 'Please enter valid input', 'ok');
         }else{
             postIncident(equipment, content);
+            setEquipment("")
+            setContent("")
         }
 
     }
