@@ -3,7 +3,6 @@ import { Image, Text, TouchableOpacity, View, StyleSheet, Dimensions } from "rea
 
 export default function Incident(props){
 
-
     return (
         <View style={styles.container}>
             <View style={styles.row}>
