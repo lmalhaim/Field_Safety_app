@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Image, Text, TouchableOpacity, View, StyleSheet, Button, onPress } from "react-native";
+import { Image, Text, TouchableOpacity, View, StyleSheet, Button, ScrollView, onPress } from "react-native";
 import { fetchEquipments } from "../Api/api";
 import Equipment from "../components/equipment";
 
@@ -8,17 +8,17 @@ class IncidentList extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            equipments : [], 
+            equipments : [],
         };
     }
 
     RetrievedEquipments = (recievedData) => {
         this.setState((prevState)=>({
-            equipments: (prevState.equipments = recievedData), 
-        }));  
+            equipments: (prevState.equipments = recievedData),
+        }));
     }
     async componentDidMount(){
-        await fetchEquipments(this.RetrievedEquipments); 
+        await fetchEquipments(this.RetrievedEquipments);
     }
     render(){
         return(
@@ -29,7 +29,7 @@ class IncidentList extends React.Component {
                             return(
                                 <View key = {index}>
                                     <Equipment  id = {item.id}
-                                    name = {item.name} 
+                                    name = {item.name}
                                     status= {item.status}
                                     fave ={item.fave}/>
                                 </View>
@@ -42,7 +42,7 @@ class IncidentList extends React.Component {
     }
 }
 const styles = StyleSheet.create({
-  
+
     container: {
         flex: 1,
         paddingTop: 40,
@@ -52,14 +52,14 @@ const styles = StyleSheet.create({
     },
 })
 
-export default IncidentList; 
+export default IncidentList;
 /*
 export default function SubmitEquipment(props){
 
 
     return (
         <View style={{ flex: 1 }}>
-            
+
         </View>
     );
 }
