@@ -1,6 +1,8 @@
 import { StatusBar } from 'expo-status-bar';
+import { AntDesign } from '@expo/vector-icons'; 
+
 import React, {useState} from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View , Image, ImageBackground} from 'react-native';
 import Screen_3 from './screens/Screen_3'
 
 import { NavigationContainer } from '@react-navigation/native';
@@ -18,7 +20,24 @@ export default function App() {
   return (
     <View style={styles.container}>
       <NavigationContainer>
-        <Tab.Navigator>
+        <Tab.Navigator screenOptions={({route})=>({
+        tabBarIcon:({color, size})=>{
+        let iconName = "tool";
+
+        if (route.name=='Safety Documents') {
+
+        iconName='book'
+        }
+        else if(route.name == "Report Incident"){
+          iconName="exclamationcircleo" 
+        }
+        else if(route.name == "Incidents"){
+          iconName = "database"
+        }
+        
+      return <AntDesign name={iconName} size={size} color={color} />
+      }
+    })}>
           <Tab.Screen name="Safety Documents" component={DocList} />
           <Tab.Screen name="Equipments" component={EquipmentList} />
           <Tab.Screen name="Incidents" component={IncidentList} />
@@ -35,5 +54,10 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     justifyContent: 'center',
     backgroundColor: '#fff',
+  },
+    logo: {
+    flex: 1,
+   width: null,
+   height: null,
   },
 });

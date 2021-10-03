@@ -36,7 +36,7 @@ export default function IncidentForm(){
                 {
                     equipments.map((item)=>{
                         return(
-                            <Picker.Item label = {item.id} value = {item.id} />
+                            <Picker.Item label = {item.id} value = {item.id} key = {item.id} />
                         )
                     })
                 }
