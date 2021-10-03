@@ -70,7 +70,7 @@ export async function fetchSafetyDocs(RetrievedData){
 }
 
 
-export async function fetchEquipements(RetrievedData){
+export async function fetchEquipments(RetrievedData){
   try{
     var faveList = []; 
     var equipementList = []; 
