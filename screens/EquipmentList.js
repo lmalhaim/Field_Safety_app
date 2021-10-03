@@ -1,5 +1,5 @@
 import * as React from "react";
-import { TouchableOpacity, View, ScrollView, Modal, TouchableHighlightBase, StyleSheet } from "react-native";
+import { Image, Text, TouchableOpacity, View, StyleSheet, Modal, TouchableHighlightBase, Button, ScrollView, onPress } from "react-native";
 import { fetchEquipments, fetchFaves } from "../Api/api";
 import Equipment from "../components/equipment";
 
@@ -8,8 +8,8 @@ class EquipmentList extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            equipments : [], 
-            fave: [], 
+            equipments : [],
+            fave: [],
         }
         this.toggleFavorite = this.toggleFavorite.bind(this)
     }
@@ -17,19 +17,19 @@ class EquipmentList extends React.Component {
         let tempFave = []
         this.state.equipments.forEach((item)=>{
             if(item.id == equipment_id){
-                item.fave = !item.fave; 
+                item.fave = !item.fave;
             }
-            tempFave.push(item); 
-        }); 
-        this.RetrievedEquipments(tempFave); 
+            tempFave.push(item);
+        });
+        this.RetrievedEquipments(tempFave);
     }
     RetrievedEquipments = (recievedData) => {
         this.setState((prevState)=>({
-            equipments: (prevState.equipments = recievedData), 
-        }));  
+            equipments: (prevState.equipments = recievedData),
+        }));
     }
     async componentDidMount(){
-        await fetchEquipments(this.RetrievedEquipments); 
+        await fetchEquipments(this.RetrievedEquipments);
     }
     render(){
         return(
@@ -39,12 +39,12 @@ class EquipmentList extends React.Component {
                         (item, index)=>{
                             return(
                                 <View key = {index}>
-                                    <Equipment  
+                                    <Equipment
                                     RetrievedEquipments = {this.RetrievedEquipments}
                                     toggleFavorite = {this.toggleFavorite}
                                     fave = {item.fave}
                                     id = {item.id}
-                                    name = {item.name} 
+                                    name = {item.name}
                                     status= {item.status}
                                     />
                                 </View>
@@ -57,7 +57,7 @@ class EquipmentList extends React.Component {
     }
 }
 const styles = StyleSheet.create({
-  
+
     container: {
         flex: 1,
         paddingTop: 40,
@@ -67,14 +67,14 @@ const styles = StyleSheet.create({
     },
 })
 
-export default  EquipmentList; 
+export default  EquipmentList;
 /*
 export default function SubmitEquipment(props){
 
 
     return (
         <View style={{ flex: 1 }}>
-            
+
         </View>
     );
 }
