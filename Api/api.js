@@ -74,31 +74,42 @@ export async function fetchEquipments(RetrievedData){
   try{
     var faveList = []; 
     var equipementList = []; 
+    deviceAPI = await network.getIpAddressAsync(); 
+    console.log('d', deviceAPI); 
 
     //Fetch favorites
-    var snapshotFave = await userRef.doc(deviceAPI).get(); 
-    if(snapshotFave.data().equipements){
-      snapshotFave.data().equipments.forEach((equipment)=>{
-        faveList.push(equipment); 
-      });
+    try{
+      var snapshotFave = await userRef.doc(deviceAPI).get(); 
+      if(snapshotFave.data().equipements){
+        snapshotFave.data().equipments.forEach((equipment)=>{
+          faveList.push(equipment); 
+        });
+      }
+
+    }catch(err){
+      console.log('here', err);
     }
 
     //Fetchh all 
-    var snapshot = await equipmentRef.get(); 
-    snapshot.forEach((doc)=>{
-      var status = false; 
-      faveList.forEach((eq)=>{
-        if(eq == doc.id){
-          status = true; 
-        }
-      })
-      equipementList.push({
-        id: doc.id, 
-        name: doc.data().name, 
-        status: doc.data().status, 
-        fave: status,
-      })
-    });
+    try{
+      var snapshot = await equipmentRef.get(); 
+      snapshot.forEach((doc)=>{
+        var status = false; 
+        faveList.forEach((eq)=>{
+          if(eq == doc.id){
+            status = true; 
+          }
+        })
+        equipementList.push({
+          id: doc.id, 
+          name: doc.data().name, 
+          status: doc.data().status, 
+          fave: status,
+        })
+      });
+    }catch(err){
+      console.log('here1', err)
+    }
     RetrievedData(equipementList); 
   } catch(err){
     console.log(err); 
