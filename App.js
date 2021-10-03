@@ -1,11 +1,13 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
+import React, {useState} from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import { addUser } from './Api/api';
+import IncidentList from './screens/IncidentList';
 export default function App() {
+  addUser(); 
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+      <IncidentList />
     </View>
   );
 }
