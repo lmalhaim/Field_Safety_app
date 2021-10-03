@@ -51,6 +51,7 @@ const styles = StyleSheet.create({
         marginTop: 20,
         paddingTop: 10,
         paddingLeft: 10,
+        paddingBottom: 10,
         width: Dimensions.get('window').width - 20,
         shadowColor: 'lightgrey',
         shadowRadius: 5,
@@ -85,7 +86,7 @@ const styles = StyleSheet.create({
     incidentsinfo: {
         alignSelf: 'center',
         fontSize: 15,
-        color: 'white',
+        color: 'black',
         marginLeft: 5
     },
 })

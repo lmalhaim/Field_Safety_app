@@ -3,8 +3,6 @@ import { TouchableOpacity, View, ScrollView, Modal, TouchableHighlightBase, Styl
 import { addUser, fetchIncidents } from "../Api/api";
 import Incident from "../components/incident";
 
-const image = { uri: 'https://s3-symbol-logo.tradingview.com/conocophillips--600.png' };
-
 class IncidentList extends React.Component {
     constructor(props){
         super(props);

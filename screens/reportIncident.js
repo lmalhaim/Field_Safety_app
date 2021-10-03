@@ -1,28 +1,28 @@
 import * as React from "react";
-import {TextInput, View, Button, StyleSheet, Alert, Text} from 'react-native'; 
-import {Picker} from '@react-native-community/picker'; 
+import {TextInput, View, Button, StyleSheet, Alert, Text} from 'react-native';
+import {Picker} from '@react-native-community/picker';
 import { fetchEquipments, postIncident } from "../Api/api";
 export default function IncidentForm(){
     let [equipment, setEquipment] = React.useState("")
     let [content, setContent] = React.useState("")
-    let [equipments, setEquipments] = React.useState([]); 
+    let [equipments, setEquipments] = React.useState([]);
 
     React.useEffect(()=>{
-        fetchEquipments(setEquipments); 
-        console.log(equipments); 
-    }, []); 
+        fetchEquipments(setEquipments);
+        console.log(equipments);
+    }, []);
     function postIncidentHandler(){
         if(content == "" || equipment == ""){
-            Alert.alert('Error', 'Please enter valid input', 'ok'); 
+            Alert.alert('Error', 'Please enter valid input', 'ok');
         }else{
-            postIncident(equipment, content); 
+            postIncident(equipment, content);
         }
-        
+
     }
     return(
-        <View>
+        <View style={styles.container}>
             <View style = {styles.textTitle} >
-                <Text>
+                <Text style = {styles.fieldTitle}>
                     Equipment ID
                 </Text>
                 {<Picker
@@ -43,7 +43,7 @@ export default function IncidentForm(){
 
                 </Picker>}
                 </View>
-                
+
             <View style = {styles.textContent}>
                 <TextInput placeholder ={"what happened?"}
                 value = {content}
@@ -52,26 +52,50 @@ export default function IncidentForm(){
             <Button title = "submit" onPress = {()=>{postIncidentHandler()}}/>
         </View>
     );
-} 
+}
 
 const styles = StyleSheet.create({
-    
+    container: {
+      backgroundColor: 'whitesmoke',
+    },
     textTitle:{
-        padding: 20, 
-        backgroundColor: 'lightgray', 
-        borderColor: 'black', 
-
+        margin: 20,
+        backgroundColor: 'white',
+        borderColor: 'black',
+        borderRadius: 20,
+        shadowColor: 'lightgrey',
+        shadowRadius: 5,
     },
     textContent:{
-        padding: 20, 
-        backgroundColor: 'lightgray', 
-        borderColor: 'darkgray', 
-
-
+        margin: 20,
+        padding: 20,
+        backgroundColor: 'white',
+        borderRadius: 20,
+        shadowColor: 'lightgrey',
+        shadowRadius: 5,
     },
-    
+    fieldTitle: {
+      fontWeight: 'bold',
+      marginLeft: 20,
+      marginTop: 20,
+    },
+    appButtonContainer: {
+      elevation: 8,
+      backgroundColor: "#009688",
+      borderRadius: 10,
+      paddingVertical: 10,
+      paddingHorizontal: 12
+    },
+    appButtonText: {
+      fontSize: 18,
+      color: "#fff",
+      fontWeight: "bold",
+      alignSelf: "center",
+      textTransform: "uppercase"
+    }
+
 })
 
-/* <TextInput placeholder = {"equipment ID"} 
+/* <TextInput placeholder = {"equipment ID"}
                 value = {equipment}
                 onChangeText ={(text)=>setEquipment(text)}/>*/
