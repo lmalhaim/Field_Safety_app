@@ -19,15 +19,21 @@ export default function Document(props){
 
 const styles = StyleSheet.create({
     container: {
-        flexDirection: 'column', 
+        flexDirection: 'column',
         backgroundColor: 'lightgrey',
-        borderColor: "gray",
-        borderWidth: 1,
-        borderRadius: 8,
+        // borderColor: "gray",
+        // borderWidth: 1,
+        // borderRadius: 20,
         justifyContent: 'flex-start',
         alignItems: 'flex-start',
-        margin: 10, 
+        margin: 10,
         width: Dimensions.get('window').width - 20,
+        borderRadius: 20,
+        shadowColor: 'lightgrey',
+        shadowRadius: 5,
+        shadowOpacity: 1,
+        backgroundColor: 'white',
+        padding: 10,
     },
     row: {
         flexDirection: 'row',
@@ -35,10 +41,10 @@ const styles = StyleSheet.create({
     },
 
     rowTitle: {
-        color: 'gray', 
-        margin: 5, 
-        marginTop: 9, 
-        fontWeight: 'bold', 
+        color: 'gray',
+        margin: 5,
+        marginTop: 9,
+        fontWeight: 'bold',
 
     },
     viewButton:{
